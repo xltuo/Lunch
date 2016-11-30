@@ -20,7 +20,7 @@ namespace Lunch.Models
         public string DishName { get; set; }
         [Required(ErrorMessage = "价格必填")]
         [Display(Name = "价格")]
-        [Range(1, int.MaxValue),]
+        [Range(1, 1000)]
         public double Price { get; set; }
         [Display(Name = "备注")]
         public string Remark { get; set; }
