@@ -1,0 +1,52 @@
+﻿@model Lunch.Models.Order
+@{
+    ViewBag.Title = "订单";
+}
+
+<h2>@ViewBag.Title。</h2>
+
+
+@using (Html.BeginForm("Add", "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>点餐。</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.OrderDate, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.Raw(Html.CalendarFor(m => m.OrderDate))
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.BusinessName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.BusinessName, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DishName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.DishName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Price, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Remark, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Remark, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="提交" />
+        </div>
+    </div>
+}
