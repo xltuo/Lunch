@@ -26,5 +26,7 @@ namespace Lunch.Models
         public string Remark { get; set; }
         [Display(Name = "是否付款")]
         public bool Ispay { get; set; }
+        public string UserID { get; set; }
+        public string UserName { get; set; }
     }
 }

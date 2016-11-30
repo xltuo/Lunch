@@ -12,18 +12,53 @@ namespace Lunch.Controllers
         // GET: Order
         public ActionResult Index()
         {
+            return View();
+        }
 
+        public ActionResult List()
+        {
             return View();
         }
 
         public ActionResult Add(Order order)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Index", order);
+            }
+            var Name = User.Identity.Name;
             DbEntities db = new DbEntities();
-            order.Id = Guid.NewGuid().ToString();
-            order.CreateDate = DateTime.Now;
-            db.Order.Add(order);
+            var userinfo = db.Set<User>().FirstOrDefault(S => S.Name == Name);
+            if (userinfo == null)
+            {
+                ModelState.AddModelError("", "获取用户失败，无法下单。");
+                return View("Index", order);
+            }
+            var neworder = new Order();
+            neworder.Id = Guid.NewGuid().ToString();
+
+            neworder.CreateDate = DateTime.Now;
+            neworder.UserID = userinfo.Id;
+            neworder.UserName = userinfo.UserName;
+            neworder.OrderDate = order.OrderDate;
+            neworder.BusinessName = order.BusinessName;
+            neworder.DishName = order.DishName;
+            neworder.Price = order.Price;
+            neworder.Remark = order.Remark;
+            neworder.Ispay = false;
+            db.Order.Add(neworder);
             db.SaveChanges();
-            return null;
+            return View("List");
+        }
+
+        public JsonResult Pay()
+        {
+            var id = Request.QueryString["ID"];
+            DbEntities db = new DbEntities();
+            var ety = db.Order.FirstOrDefault(s => s.Id == id);
+            ety.Ispay = true;
+            db.SaveChanges();
+            return Json("ok");
         }
     }
 }

@@ -30,20 +30,20 @@ namespace Lunch.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(user);
+                return View("Index", user);
             }
             DbEntities db = new DbEntities();
             var userInfo = db.User.FirstOrDefault(s => s.Name == user.Name);
             if (userInfo != null && userInfo.Pwd == user.Pwd)
             {
-                FormsAuthentication.SetAuthCookie(userInfo.UserName, false);
+                FormsAuthentication.SetAuthCookie(userInfo.Name, false);
                 return RedirectToAction("Index", "Order");
             }
             else
             {
                 ModelState.AddModelError("", "无效的登录尝试。");
             }
-            return View(user);
+            return View("Index", user);
         }
 
 

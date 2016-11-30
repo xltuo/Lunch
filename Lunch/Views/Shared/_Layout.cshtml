@@ -6,10 +6,19 @@
     <title>@ViewBag.Title</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+
     <link href="~/Scripts/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" />
     <script src="~/Scripts/My97DatePicker/calendar.js"></script>
     <script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+
+    <script src="~/Scripts/bootstrap-table.min.js"></script>
+    <script src="~/Scripts/bootstrap-table-zh-CN.min.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,7 +32,10 @@
                 @Html.ActionLink("午餐预定", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav"></ul>
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("订餐列表", "List", "Order")</li>
+                    <li>@Html.ActionLink("订餐", "Index", "Order")</li>
+                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

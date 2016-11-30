@@ -97,11 +97,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-table.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap-table-zh-CN.min.js" />
+    <Content Include="Scripts\bootstrap-table.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -148,9 +151,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611300858264_test.cs" />
-    <Compile Include="Migrations\201611300858264_test.Designer.cs">
-      <DependentUpon>201611300858264_test.cs</DependentUpon>
+    <Compile Include="Migrations\201611301357063_migrationName.cs" />
+    <Compile Include="Migrations\201611301357063_migrationName.Designer.cs">
+      <DependentUpon>201611301357063_migrationName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CalendarExtensions.cs" />
@@ -178,14 +181,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611300858264_test.resx">
-      <DependentUpon>201611300858264_test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611301357063_migrationName.resx">
+      <DependentUpon>201611301357063_migrationName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,17 +1,95 @@
-﻿
+﻿@using Lunch.Models;
+@model Lunch.Models.Order
 @{
-    Layout = null;
+    ViewBag.Title = "订单";
+}
+<h2>@ViewBag.Title。</h2>
+<h4>订单列表。</h4>
+
+
+@{
+    var Name = HttpContext.Current.User.Identity.Name;
+    DbEntities db = new DbEntities();
+    var user = db.User.FirstOrDefault(s => s.Name == Name);
+    var list = db.Set<Order>().ToList();
+    if (user != null)
+    {
+
+        <table data-toggle="table" data-search="true" data-show-refresh="true" data-toolbar="#toolbar"
+               data-show-toggle="true"
+               data-show-columns="true"
+               data-show-export="true"
+               data-minimum-count-columns="2"
+               data-show-pagination-switch="true"
+               data-pagination="true"
+               data-id-field="id"
+               data-page-list="[10, 25, 50, 100, ALL]"
+               data-show-footer="false">
+            <thead>
+                <tr>
+                    <th>订餐人</th>
+                    <th>时间</th>
+                    <th>商家名称</th>
+                    <th>菜品名称</th>
+                    <th>价格</th>
+                    <th>备注</th>
+                    <th>是否付款</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ foreach (var item in list)
+                    {
+                        <tr>
+                            <td>@item.UserName</td>
+                            <td>@item.OrderDate.ToString("yyyy-MM-dd")</td>
+                            <td>@item.BusinessName</td>
+
+                            <td>@item.DishName </td>
+                            <td>@item.Price</td>
+                            <td>@item.Remark</td>
+                            <td>
+                                @if (item.Ispay == true)
+                                {
+                                    @:@("是")
+                                }
+                                else
+                                {
+                                    @:@("否")
+                                }
+                            </td>
+                            <td>
+
+                                <button type="button" class="btn btn-warning" onclick=" pay('@item.Id');">确认付款</button>
+                            </td>
+                        </tr>
+                    }}
+            </tbody>
+        </table>
+                    }
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>List</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>
+
+<script>
+
+    function initTable() {
+        $table.bootstrapTable({
+            height: getHeight()
+        })
+    }
+
+    function pay(id) {
+        var data = { ID: id };
+        $.ajax({
+            type: 'POST',
+            url: "/Order/Pay?ID=" + id,
+            data: data,
+            success: function (data) {
+                alert(data);
+                window.location.reload();
+            },
+            dataType: "json"
+        });
+    }
+</script>
