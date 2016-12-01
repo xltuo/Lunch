@@ -1,10 +1,10 @@
 ﻿@using Lunch.Models;
 @model Lunch.Models.Order
 @{
-    ViewBag.Title = "订单";
+    ViewBag.Title = "订餐明细";
 }
 <h2>@ViewBag.Title。</h2>
-<h4>订单列表。</h4>
+<h4>订餐明细列表。</h4>
 @{
     var Name = HttpContext.Current.User.Identity.Name;
     DbEntities db = new DbEntities();
@@ -32,15 +32,17 @@
                     <th>价格</th>
                     <th>备注</th>
                     <th>是否付款</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
-                @{ foreach (var item in list.Where(s => s.UserID == user.Id))
+                @{ foreach (var item in list)
                     {
                         <tr>
                             <td>@item.UserName</td>
                             <td>@item.OrderDate.ToString("yyyy-MM-dd")</td>
                             <td>@item.BusinessName</td>
+
                             <td>@item.DishName </td>
                             <td>@item.Price</td>
                             <td>@item.Remark</td>
@@ -53,6 +55,10 @@
                                 {
                                     @:@("否")
                                 }
+                            </td>
+                            <td>
+                                <button class="btn btn-mini btn-warning" type="button" onclick="pay('@item.Id');">确认付款</button>
+                                <button class="btn btn-mini btn btn-danger" type="button" onclick="del('@item.Id');">删除订单</button>
                             </td>
                         </tr>
                     }}
@@ -72,15 +78,34 @@
     }
 
     function pay(id) {
-        var data = { ID: id };
-        $.ajax({
-            type: 'POST',
-            url: "/Order/Pay?ID=" + id,
-            data: data,
-            success: function (data) {
-                window.location.reload();
-            },
-            dataType: "json"
-        });
+        if (confirm("确认已经付款?")) {
+            var data = { ID: id };
+            $.ajax({
+                type: 'POST',
+                url: "/Order/Pay?ID=" + id,
+                data: data,
+                success: function (data) {
+                    window.location.reload();
+                },
+                dataType: "json"
+            });
+        }
+    }
+
+
+    function del(id) {
+        if (confirm("确认删除订单?")) {
+            var data = { ID: id };
+            $.ajax({
+                type: 'POST',
+                url: "/Order/Del?ID=" + id,
+                data: data,
+                success: function (data) {
+                    alert(data);
+                    window.location.reload();
+                },
+                dataType: "json"
+            });
+        }
     }
 </script>

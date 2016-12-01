@@ -1,4 +1,5 @@
-﻿using Lunch.Models;
+﻿using Lunch.App_Start;
+using Lunch.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Lunch.Controllers
 {
+    [LoginFilter]
     public class OrderController : Controller
     {
         // GET: Order
@@ -16,6 +18,11 @@ namespace Lunch.Controllers
         }
 
         public ActionResult List()
+        {
+            return View();
+        }
+
+        public ActionResult AdminList()
         {
             return View();
         }
@@ -57,6 +64,16 @@ namespace Lunch.Controllers
             DbEntities db = new DbEntities();
             var ety = db.Order.FirstOrDefault(s => s.Id == id);
             ety.Ispay = true;
+            db.SaveChanges();
+            return Json("ok");
+        }
+
+        public JsonResult Del()
+        {
+            var id = Request.QueryString["ID"];
+            DbEntities db = new DbEntities();
+            var ety = db.Order.FirstOrDefault(s => s.Id == id);
+            db.Order.Remove(ety);
             db.SaveChanges();
             return Json("ok");
         }

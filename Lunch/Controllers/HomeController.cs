@@ -41,7 +41,7 @@ namespace Lunch.Controllers
             }
             else
             {
-                ModelState.AddModelError("", "无效的登录尝试。");
+                ModelState.AddModelError("", "无效的登录尝试。检查用户名和密码");
             }
             return View("Index", user);
         }
@@ -52,6 +52,13 @@ namespace Lunch.Controllers
         {
             if (!ModelState.IsValid)
             {
+                if (string.IsNullOrEmpty(user.UserName))
+                    ModelState.AddModelError("", "真实姓名必填");
+                return View("Register", user);
+            }
+            if (string.IsNullOrEmpty(user.UserName))
+            {
+                ModelState.AddModelError("", "真实姓名必填");
                 return View("Register", user);
             }
             DbEntities db = new DbEntities();

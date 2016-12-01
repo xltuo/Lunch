@@ -7,13 +7,13 @@ namespace Lunch.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class migrationName : IMigrationMetadata
+    public sealed partial class migrationName1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(migrationName));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(migrationName1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611301357063_migrationName"; }
+            get { return "201612010236587_migrationName1"; }
         }
         
         string IMigrationMetadata.Source

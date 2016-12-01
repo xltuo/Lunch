@@ -13,7 +13,6 @@ namespace Lunch.Models
         [Required(ErrorMessage = "密码必填")]
         [Display(Name = "密码")]
         public string Pwd { get; set; }
-
         [Display(Name = "真实姓名")]
         public string UserName { get; set; }
         [Display(Name = "注册时间")]
