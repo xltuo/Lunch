@@ -70,17 +70,4 @@
             height: getHeight()
         })
     }
-
-    function pay(id) {
-        var data = { ID: id };
-        $.ajax({
-            type: 'POST',
-            url: "/Order/Pay?ID=" + id,
-            data: data,
-            success: function (data) {
-                window.location.reload();
-            },
-            dataType: "json"
-        });
-    }
 </script>

@@ -55,7 +55,7 @@ namespace Lunch.Controllers
             neworder.Ispay = false;
             db.Order.Add(neworder);
             db.SaveChanges();
-            return View("List");
+            return RedirectToAction("List", "Order");
         }
 
         public JsonResult Pay()

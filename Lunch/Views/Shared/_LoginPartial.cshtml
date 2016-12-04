@@ -6,7 +6,7 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("你好，" + User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("你好，" + User.Identity.Name + "!", "Index", "Order", routeValues: null, htmlAttributes: new { title = "Index" })
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">注销</a></li>
         </ul>
