@@ -17,7 +17,7 @@ namespace Lunch.App_Start
             }
             else
             {
-                if (filter.HttpContext.Request.RawUrl.Contains("AdminList") && HttpContext.Current.User.Identity.Name != "Admin")
+                if (filter.HttpContext.Request.RawUrl.Contains("AdminList") && HttpContext.Current.User.Identity.Name.ToLower() != "admin")
                 {
                     filterContext.Result = new RedirectResult("/Order/List");
                 }
