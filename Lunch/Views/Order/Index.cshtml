@@ -15,14 +15,14 @@
     <div class="form-group">
         @Html.LabelFor(m => m.OrderDate, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.Raw(Html.CalendarFor(m => m.OrderDate))
+            @Html.Raw(Html.Calendar("OrderDate", DateTime.Now))
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.BusinessName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.BusinessName, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.BusinessName, new { @class = "form-control", @Value = "田老师" })
         </div>
     </div>
 
